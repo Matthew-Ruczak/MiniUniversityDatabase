@@ -100,8 +100,10 @@ def personToUpdateMenu(personToUpdateObj):
         print("Invalid input, please try again")
     personToUpdateMenu(personToUpdateObj)
 
-def searchForPersonByIDMenu:
-    searchForNum = input("What is their special number? (OR enter 0000 to exit)")
+def searchForPersonByIDMenu():
+    searchForNum = input("What is their special number? (OR enter 0000 to exit) ")
+    if searchForNum == "0000":
+        mainMenu()
     searchResult = findPersonByNumber(searchForNum)
     if searchResult == -1:
         print(f'No person found with the special number {searchForNum}, please try again.')
@@ -109,7 +111,7 @@ def searchForPersonByIDMenu:
         if type(searchResult[0]) == Employee:
             print(f"Employee {searchResult[0].getFullName()} {searchResult[0].getEmployeeNum()}")
         elif type(searchResult[0]) == Student:
-            print(f"Student {searchResult[0].getFullName()} {searchResult[0].setStudentNumber()}")
+            print(f"Student {searchResult[0].getFullName()} {searchResult[0].getStudentNumber()}")
         else:
             print(f"Error when searching for {searchForNum}, please try again")
     searchForPersonByIDMenu()
