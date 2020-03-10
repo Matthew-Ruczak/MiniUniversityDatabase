@@ -43,6 +43,10 @@ def person_info_to_add_menu(person_type):
 
 
 def remove_person_menu():
+    # Checking if there are people to delete
+    if len(listOfPersons) <= 0:
+        print('\tDatabase is empty, no person to remove.')
+        main_menu()
     # Processing User input
     person_to_remove_special_num = input("\tWhat is the person's special number? (OR enter 0000 to exit) ")
     if person_to_remove_special_num == "0000":
@@ -59,6 +63,11 @@ def remove_person_menu():
 
 
 def update_person_menu():
+    # Checking if there are people to update
+    if len(listOfPersons) <= 0:
+        print('\tDatabase is empty, no person to update.')
+        main_menu()
+
     print('\tUpdate Person Menu')
     person_to_update_special_num = input("\tPlease enter their unique number or enter 0000 to exit: ")
     if person_to_update_special_num == "0000":
@@ -74,7 +83,7 @@ def update_person_menu():
 def person_to_update_menu(person_to_update_obj):
     print(f"\tWhat would you like to update for {person_to_update_obj.getFullName()}?")
     print("""
-        1. First Name
+         1. First Name
          2. Last Name
          3. Unique Number
          4. Exit
@@ -101,6 +110,11 @@ def person_to_update_menu(person_to_update_obj):
 
 
 def search_for_person_by_id_menu():
+    # Checking if there are people to delete
+    if len(listOfPersons) <= 0:
+        print('\tDatabase is empty, no person to search for.')
+        main_menu()
+
     search_for_special_num = input("\tWhat is their special number? (OR enter 0000 to exit) ")
     if search_for_special_num == "0000":
         main_menu()
@@ -108,10 +122,10 @@ def search_for_person_by_id_menu():
     if search_result == -1:
         print(f'\tNo person found with the special number {search_for_special_num}, please try again.')
     else:
-        if type(search_result[0]) == Employee:
-            print(f"\tEmployee {search_result[0].getFullName()} {search_result[0].getEmployeeNum()}")
+        if type(search_result) == Employee:
+            print(f"\tEmployee {search_result.getFullName()} {search_result.getEmployeeNum()}")
         elif type(search_result[0]) == Student:
-            print(f"\tStudent {search_result[0].getFullName()} {search_result[0].getStudentNumber()}")
+            print(f"\tStudent {search_result.getFullName()} {search_result.getStudentNumber()}")
         else:
             print(f"\tError when searching for {search_for_special_num}, please try again")
     search_for_person_by_id_menu()
@@ -121,13 +135,17 @@ def display_all_persons():
     print("\t_______________________")
     print("\t\tPersons")
     print("\t-----------------------")
-    for person in listOfPersons:
-        if type(person) == Employee:
-            print(f"\tEmployee {person.getFullName()} {person.getEmployeeNum()}")
-        elif type(person) == Student:
-            print(f"\tStudent {person.getFullName()} {person.getStudentNumber()}")
-        else:
-            print(f"\tError with Person, data was not retrieved.")
+    # Checking if there are people to display
+    if len(listOfPersons) <= 0:
+        print('\tEmpty')
+    else:
+        for person in listOfPersons:
+            if type(person) == Employee:
+                print(f"\tEmployee {person.getFullName()} {person.getEmployeeNum()}")
+            elif type(person) == Student:
+                print(f"\tStudent {person.getFullName()} {person.getStudentNumber()}")
+            else:
+                print(f"\tError with Person, data was not retrieved.")
     print("\t_______________________")
     main_menu()
 
